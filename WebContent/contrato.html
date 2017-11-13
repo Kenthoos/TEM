@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" ng-app = "contratoModulo">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<script src="js/angular.min.js"></script>
+	<link rel="icon" href="Imagens/421858.png">
+
+	<title>Gestão Telecom</title>
+
+
+	<!-- Bootstrap core CSS -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/estilos.css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link href="css/navbar-top.css" rel="stylesheet">
+	<script src="controller/contrato.js"></script>
+
+
+</head>
+
+<body ng-controller = "contratoController">
+
+<div ng-include = "'menu.html'" > </div>
+
+	<div class="container">
+
+		<div  id="lbcontainer">
+			<div class="container"  id="divCadastroContratos"><h1 id="lbCadastroEmpresas">Cadastro de Contratos</h1><br></div>
+		</div>
+
+
+		<div class="jumbotron">     
+
+			<form class="container-liquid">
+
+				<div class="form-row">
+
+					<div class="form-group col-md-1">
+						<label for="codigocontrato" class="col-form-label">Código</label>
+						<input type="text" ng-model ="contrato.codigocontrato" class="form-control" id="codigocontrato" placeholder="Código">
+					</div>
+
+					<div class="form-group col-md-2">
+						<label for="numero" class="col-form-label">Número</label>
+						<input type="text" ng-model ="contrato.numero" class="form-control" id="numero" placeholder="Número contrato"></div>
+
+
+						<div class="form-group col-md-5">					
+							<label for="listaempresa"  class="col-form-label">Empresa</label>
+							<select class="form-control" ng-model = "contrato.empresa" ng-options = " empresa.razaosocial for empresa in empresas track by empresa.codigoempresa ">	</select>
+						</div>
+
+
+						<div class="form-group col-md-2">
+							<label for="datainicial" class="col-form-label">Data Início</label>
+							<input type="text" ng-model = "contrato.datainicio" class="form-control" id="datainicial"  placeholder="Data Inicial" >
+						</div>
+
+						<div class="form-group col-md-2">
+							<label for="datafinal" class="col-form-label">Data Fim</label>
+							<input type="text" class="form-control" id="datafinal" placeholder="Data Fim" 
+							ng-model = "contrato.datafim"
+
+							>
+						</div>
+
+
+					</div>
+
+					<div class="form-row">
+
+
+						<div class="form-group col-md-2">					
+							<label for="listacontrato"  class="col-form-label">Servico de contrato</label>
+
+							<select class="form-control" ng-model = "contrato.tipo"
+									ng-options = "contrato.tipo for contratos in contrato track by contrato.codigocontrato"
+							 >	
+
+							<option value="">Selecione</option>
+						</select>
+
+					</div>
+
+
+				</div>
+				<br>
+
+
+				<div class="form-group col-md-3">
+
+					<button type="button" ng-click="limparCampos()" class="btn btn-outline-secondary">Novo</button>
+					<button type="submit" ng-click="gravar()" class="btn btn-outline-success">Gravar</button>
+					<button type="button" ng-click="excluir()" class="btn btn-outline-danger">Excluir</button> 
+
+				</div>	
+			</div>	
+
+
+		</form>
+
+		<div class="form-group col-md-2">
+			<input type="text" class="form-control" id="pesquisa" ng-model= "pesquisaContrato" placeholder="Digite a pesquisa">
+		</div>
+
+		<table class= "table table-hover">
+			<thead>
+				<tr>
+					<th>Código</th>
+					<th>Numero</th>
+					<th>Empresa</th>
+					<th>Data Inicio</th>
+					<th>Data Fim</th>
+					<th>Tipo</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat = "contratoTabela in contratos | filter:pesquisaContrato" ng-click="selecionaContrato (contratoTabela)" >
+					<td>{{contratoTabela.codigocontrato}}</td>
+					<td>{{contratoTabela.numero}}</td>
+					<td>{{contratoTabela.empresa.razaosocial}}</td>
+					<td>{{contratoTabela.datainicio }}</td>
+					<td>{{contratoTabela.datafim}}</td>
+					<td>{{contratoTabela.tipo}}</td>
+
+				</tr>
+			</tbody>
+		</table>
+
+
+
+						<!-- Bootstrap core JavaScript
+							================================================== -->
+							<!-- Placed at the end of the document so the pages load faster -->
+							<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+							<script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+							<script src="js/popper.min.js"></script>
+							<script src="js/bootstrap.min.js"></script>      
+						</body>
+						</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" ng-app = "empresasModulo">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<script src="js/angular.min.js"></script>
+	<link rel="icon" href="Imagens/421858.png">
+
+	<title>Gestão Telecom</title>
+
+
+	<!-- Bootstrap core CSS -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/estilos.css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link href="css/navbar-top.css" rel="stylesheet">
+	<script src="controller/empresa.js"></script>
+
+
+</head>
+
+<body ng-controller = "empresasController">
+
+	<div ng-include = "'menu.html'" > </div>
+
+	<div class="container" novalidade>
+		<div  id="lbcontainer">
+			<div class="container"  id="divCadastroEmpresas"><h1 id="lbCadastroEmpresas">Cadastro de Empresas</h1><br></div>
+		</div>
+
+
+		<div class="jumbotron">     
+
+			<form class="container" id="cadastro">
+				<div class="form-row">
+
+					<div class="form-group col-md-2">
+						<label for="codigoempresa" class="col-form-label">Código</label>
+						<input type="text" ng-model ="empresa.codigoempresa" class="form-control" id="codigoempresa" placeholder="Código" >
+					</div>
+
+
+					<div class="form-group col-md-6">
+						<label for="razaosocial" class="col-form-label">Razão Social</label>
+						<input type="text" ng-model = "empresa.razaosocial" class="form-control" id="razaosocial" placeholder="Razão Social">
+
+					</div>
+					<div class="form-group col-md-4">
+						<label for="cnpj" class="col-form-label">CNPJ</label>
+						<input type="text" ng-model = "empresa.cnpj" class="form-control " id="cnpj" placeholder="CNPJ">
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="enderecoempresa" class="col-form-label">Endereço</label>
+						<input type="text" ng-model = "empresa.endereco" class="form-control" id="enderecoempresa" placeholder="Rua, Avenida...">
+					</div>  
+
+					<div class="form-group col-md-4">
+						<label for="bairroempresa" class="col-form-label">Bairro</label>
+						<input type="text" ng-model = "empresa.bairro" class="form-control" id="bairroempresa" placeholder="Bairro">
+					</div>  
+
+					<div class="form-group col-md-3">
+						<label for="cidadeempresa" class="col-form-label">Cidade</label>
+						<input type="text" ng-model = "empresa.cidade" class="form-control" id="cidadeempresa" placeholder="Cidade">
+					</div>  
+
+					<div class="form-group col-md-1">
+						<label for="ufempresa" class="col-form-label">UF</label>
+						<input type="text" ng-model = "empresa.uf" class="form-control" id="ufempresa" placeholder="UF">
+					</div>  
+
+				</div>
+
+				<div class="form-row">
+
+					<div class="form-group col-md-2">
+						<label for="cepempresa" class="col-form-label">CEP</label>
+						<input type="text" ng-model = "empresa.cep" class="form-control" id="cepempresa" placeholder="CEP">
+					</div>
+
+					<div class="form-group col-md-3">
+						<label for="contatoempresa" class="col-form-label">Contato</label>
+						<input type="text" ng-model = "empresa.contato"  class="form-control" id="contatoempresa" placeholder="Nome do contato">
+					</div>
+
+					<div class="form-group col-md-3">
+						<label for="emailempresa" class="col-form-label">Email</label>
+						<input type="email" ng-model = "empresa.email" class="form-control" id="emailempresa" placeholder="Email">
+					</div>
+
+					<div class="form-group col-md-4">
+						<label for="telefoneempresa" class="col-form-label">Telefone</label>
+						<input type="text" ng-model = "empresa.telefone" class="form-control" id="telefoneempresa" placeholder="Telefone">
+					</div>
+
+
+					<div class="form-group col-md-3">
+
+						<button type="button" ng-click="limparCampos()" class="btn btn-outline-secondary">Novo</button>
+						<button type="submit" ng-click="gravar()" class="btn btn-outline-success">Gravar</button>
+						<button type="button" ng-click="excluir()" class="btn btn-outline-danger">Excluir</button>
+
+						<button type="button" ng-click="limparCampos()" class="btn btn-outline-secondary">Limpar</button>
+
+					</div> 
+
+				</div>
+
+			</div>
+
+		</form>
+
+
+
+		<div class="form-group col-md-2">
+			<input type="text" class="form-control" id="pesquisa" ng-model= "pesquisaEmpresa" placeholder="Digite a pesquisa">
+		</div>
+
+		<table class= "table table-hover">
+			<thead>
+				<tr>
+					<th> Código</th>
+					<th>Razão Social</th>
+					<th>CNPJ</th>
+					<th>Contato</th>
+					<th> </th>
+				</tr>
+
+			</thead>
+			<tbody>
+				<tr ng-repeat = "empresasTabela in empresas | filter: pesquisaEmpresa" ng-click="selecionaEmpresa(empresasTabela)" >
+					<td>{{empresasTabela.codigoempresa}}</td>
+					<td>{{empresasTabela.razaosocial}}</td>
+					<td>{{empresasTabela.cnpj}}</td>
+					<td>{{empresasTabela.contato}}</td>
+					<td><a href="" ng-click="excluir()">[Excluir]</a></td>
+
+				</tr>
+			</tbody>
+		</table>
+
+
+
+						<!-- Bootstrap core JavaScript
+							================================================== -->
+							<!-- Placed at the end of the document so the pages load faster -->
+							<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+							<script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+							<script src="js/popper.min.js"></script>
+							<script src="js/bootstrap.min.js"></script>
+
+						</body>
+						</html>
